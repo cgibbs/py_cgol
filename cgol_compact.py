@@ -4,7 +4,7 @@ libtcod.console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, 'CGOL', False)
 def check_life(board, x, y): return (0 if x == 0 or x == SCREEN_WIDTH - 1 or y == 0 or y == SCREEN_HEIGHT - 1 else 1 < sum_neighbors(board, x, y) < 4 if board[x][y] else 3 == sum_neighbors(board, x, y))
 def sum_neighbors(board, x, y):	return sum(board[x-1][y-1:y+2] + board[x+1][y-1:y+2]) + board[x][y-1] + board[x][y+1]
 def cycle_board(board):	return [[check_life(board, x, y) for y in range(SCREEN_HEIGHT)] for x in range(SCREEN_WIDTH)]
-(mouse, key, old_m_pos, living, board) = (libtcod.Mouse(), libtcod.Key(), (0, 0), 0, [[0 for y in range(SCREEN_HEIGHT)] for x in range(SCREEN_WIDTH)])
+(mouse, key, living, board) = (libtcod.Mouse(), libtcod.Key(), 0, [[0 for y in range(SCREEN_HEIGHT)] for x in range(SCREEN_WIDTH)])
 while True:
 	libtcod.sys_check_for_event(libtcod.EVENT_KEY_PRESS | libtcod.EVENT_MOUSE, key, mouse)
 	if key.vk == libtcod.KEY_ESCAPE: break
